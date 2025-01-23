@@ -9,7 +9,8 @@ import {
   PrimaryKey,
   Property,
   Unique
-} from '@mikro-orm/sqlite';
+} from '@mikro-orm/core';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 export enum SchoolGrade {
   GradeOne = '1',
@@ -81,6 +82,18 @@ beforeAll(async () => {
     debug: ['query', 'query-params'],
     allowGlobalContext: true, // only for testing
   });
+
+  MikroORM.init({
+    host: '127.0.0.1',
+    dbName: 'test-db',
+    port: 5432,
+    user: 'username',
+    password: 'password',
+    driver: PostgreS,
+    entities: ['./dist/entities'],
+    entitiesTs: ['./src/entities'],
+    allowGlobalContext: true,
+  })
   await orm.schema.refreshDatabase();
 });
 
