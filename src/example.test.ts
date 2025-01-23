@@ -77,23 +77,17 @@ let orm: MikroORM;
 
 beforeAll(async () => {
   orm = await MikroORM.init({
-    dbName: ':memory:',
-    entities: [SubTestEntity, ExerciseEntity],
-    debug: ['query', 'query-params'],
-    allowGlobalContext: true, // only for testing
-  });
-
-  MikroORM.init({
     host: '127.0.0.1',
     dbName: 'test-db',
     port: 5432,
     user: 'username',
     password: 'password',
-    driver: PostgreS,
-    entities: ['./dist/entities'],
-    entitiesTs: ['./src/entities'],
+    driver: PostgreSqlDriver,
+    entities: [SubTestEntity, ExerciseEntity],
+    debug: ['query', 'query-params'],
     allowGlobalContext: true,
-  })
+  });
+
   await orm.schema.refreshDatabase();
 });
 
