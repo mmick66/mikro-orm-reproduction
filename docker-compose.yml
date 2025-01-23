@@ -1,0 +1,15 @@
+﻿services:
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test-db
+      TZ: Europe/Athens
